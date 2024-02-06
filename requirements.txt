@@ -16,7 +16,7 @@ cachetools==4.2.4
 certifi==2021.10.8
 cffi==1.15.0
 charset-normalizer==2.0.8
-click==8.0
+click==7.1.2
 colorama==0.4.4
 cssselect==1.1.0
 cycler==0.11.0
@@ -29,7 +29,7 @@ entrypoints==0.3
 et-xmlfile==1.1.0
 fake-useragent==0.1.11
 filelock==3.7.1
-Flask==2.2.3
+# Flask==2.2.3
 flatbuffers==1.12
 fonttools==4.28.4
 gast==0.4.0
