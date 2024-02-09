@@ -33,19 +33,44 @@ def cluster_links(links):
 
 # Main function to run the Streamlit web app
 def main():
+    # Define custom CSS styles
+    banner_css = """
+        <style>
+            .banner-img {
+                background-image: url('https://d1csarkz8obe9u.cloudfront.net/posterpreviews/breaking-news-banner-design-template-43d6dcbf37ca0a7d1450cb20f76b96fb_screen.jpg?ts=1677499703'); /* URL of your banner image */
+                background-size: cover;
+                background-size: 100 100;
+                padding: 50px;
+                text-align: center;
+                color: white;
+                font-size: 36px;
+                height: 300px;
+            }
+        </style>
+    """
+
+    # Render the banner image using Markdown and custom CSS
+    st.markdown(banner_css, unsafe_allow_html=True)
+    st.markdown('<div class="banner-img"></div>', unsafe_allow_html=True)
+
+    # Continue with the rest of your Streamlit app
     st.title('Clustered News Article Links')
 
     news_url = st.text_input('Enter URL of the news website to scrape:', 'https://www.standardmedia.co.ke/')
 
     if st.button('Scrape Links and Cluster'):
-        news_links = scrape_news_links(news_url)
-        clustered_links = cluster_links(news_links)
+        if(not news_url):
+            st.warning('No URL found. Please insert a URL.')
+        else:
+            news_links = scrape_news_links(news_url)
+            clustered_links = cluster_links(news_links)
 
-        st.subheader('Clustered News Article Links')
-        for cluster_id, links in clustered_links.items():
-            st.write(f'Cluster {cluster_id + 1} ({len(links)} links)')
-            for link in links:
-                st.write(link)
+            st.subheader('Clustered News Article Links')
+            for cluster_id, links in clustered_links.items():
+                # Style the cluster names with Markdown syntax
+                st.markdown(f"### Cluster {cluster_id + 1} ({len(links)} links)")
+                for link in links:
+                    st.write(link)
 
 if __name__ == '__main__':
     main()
